@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import {
@@ -8,12 +8,28 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, reset } from "../../../features/auth/authSlice";
+import { RootState, AppDispatch } from "../../../app/store";
+import { redirect, useNavigate } from "react-router-dom";
 interface StateI {
   email: string;
   password: string;
 }
+
 const SignIn = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const { user, isLoading, isError, isAuthenticated, message } = useSelector(
+    (state: RootState) => state.auth
+  );
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("auth");
+      return navigate("/");
+    }
+  }, [isAuthenticated]);
+
   const [state, setState] = useState<any>({
     email: "",
     password: "",
@@ -22,8 +38,15 @@ const SignIn = () => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
   };
-  const handleSubmit = () => {
+  console.log(message ? message : "Nothing");
+  const handleSubmit = async () => {
     console.log(state);
+    await dispatch(
+      loginUser({ username: state.email, password: state.password })
+    );
+    if (isAuthenticated) {
+      navigate("/");
+    }
   };
   return (
     <Container
@@ -34,6 +57,19 @@ const SignIn = () => {
       <section
         style={{ display: "grid", alignItems: "center", marginTop: "5rem" }}
       >
+        {isError && message && (
+          <Typography
+            variant="h6"
+            style={{
+              justifyContent: "center",
+              alignSelf: "center",
+              textAlign: "center",
+              padding: "4rem",
+            }}
+          >
+            {message}
+          </Typography>
+        )}
         <Typography
           variant="h6"
           style={{
@@ -43,7 +79,7 @@ const SignIn = () => {
             padding: "4rem",
           }}
         >
-          Login in
+          Login in to continue
         </Typography>
 
         <form
@@ -72,7 +108,7 @@ const SignIn = () => {
 
           {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
           <FormControl variant="outlined" style={{ marginTop: "4rem" }}>
-            <InputLabel htmlFor="my-input">Email address</InputLabel>
+            <InputLabel htmlFor="my-input">Password</InputLabel>
             <Input
               style={{
                 padding: "0.7rem",
