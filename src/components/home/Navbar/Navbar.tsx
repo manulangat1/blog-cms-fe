@@ -1,11 +1,11 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../features/auth/authSlice";
+
 import { RootState, AppDispatch } from "../../../app/store";
 import { redirect, useNavigate, Link, NavLink } from "react-router-dom";
 import { reset } from "../../../features/auth/authSlice";
@@ -14,9 +14,10 @@ import { Button } from "@mui/material";
 function Navbar() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { user, isLoading, isError, isAuthenticated } = useSelector(
+  const {  isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
+  console.log(isAuthenticated, "this is authenticated")
   const handleLogout = async () => {
     await localStorage.removeItem("blog-cms-token");
     await dispatch(reset());

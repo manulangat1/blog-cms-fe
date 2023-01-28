@@ -1,7 +1,7 @@
 import axios from "axios";
 const BASE_URL = "http://localhost:8000";
 const LOGIN_URL = BASE_URL + "/users/v1/login/";
-const PROFILE_URL = BASE_URL + "/users/v1/me";
+const PROFILE_URL = BASE_URL + "/users/v1/me/";
 
 const login = async (userData: any) => {
   const config = {

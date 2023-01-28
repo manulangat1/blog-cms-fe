@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { FormControl, InputLabel, Input, Button } from "@mui/material";
-import { createPosts, getPostDetail, getPosts, UpdateSlice } from "../../../features/posts/postSlice";
+import { getPostDetail, getPosts, UpdateSlice } from "../../../features/posts/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../app/store";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import TurndownService from 'turndown';
+
 
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
-// import Editor from "rich-markdown-editor";
+
 
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -29,7 +29,6 @@ interface Istate {
 
 const  EditPost = () => {
     const params = useParams();
-    const turndownService = new TurndownService()
     useEffect(() => {
       if (params.id) {
         dispatch(getPostDetail(params.id));

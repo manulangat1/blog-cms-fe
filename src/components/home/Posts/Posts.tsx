@@ -1,36 +1,34 @@
 import React, { useEffect } from "react";
 // import * as React from 'react';
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts, publish, reset } from "../../../features/posts/postSlice";
+import { getPosts, publish } from "../../../features/posts/postSlice";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { AppDispatch, RootState } from "../../../app/store";
 import CircularProgress from "@mui/material/CircularProgress";
-import CreatePost from "./CreatePost";
+// import CreatePost from "./CreatePost";
 import { CardMedia, Grid } from "@mui/material";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
-import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
-import rehypeRaw from "rehype-raw";
+// import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
+// import rehypeRaw from "rehype-raw";
 
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-import ReactMarkdown from "react-markdown";
-// import remarkGfm from "remark-gfm";
-import gfm from "remark-gfm";
+// import ReactMarkdown from "react-markdown";
+// // import remarkGfm from "remark-gfm";
+// import gfm from "remark-gfm";
 
 function Posts() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { posts, isLoading, isError } = useSelector(
+  const { posts, isLoading} = useSelector(
     (state: RootState) => state.posts
   );
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -38,10 +36,11 @@ function Posts() {
   useEffect(() => {
     dispatch(getPosts());
     console.log("i am trying");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
-  const limitChar = (content: string) => {
-    return content.substring(0, 200) + "...";
-  };
+  // const limitChar = (content: string) => {
+  //   return content.substring(0, 200) + "...";
+  // };
   const onClickRedirect = (id: string) => {
     console.log("i am clicked", id);
     return navigate(`/post/${id}`);
