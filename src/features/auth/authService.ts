@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://34.201.61.154:8000";
 const LOGIN_URL = BASE_URL + "/users/v1/login/";
 const PROFILE_URL = BASE_URL + "/users/v1/me/";
 
