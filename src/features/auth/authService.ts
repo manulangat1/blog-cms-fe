@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const LOGIN_URL = BASE_URL + "/users/v1/login/";
 const PROFILE_URL = BASE_URL + "/users/v1/me/";
 
@@ -10,7 +10,13 @@ const login = async (userData: any) => {
     },
   };
 
-  const response = await axios.post(LOGIN_URL, userData, config);
+  console.log(process.env.REACT_APP_BASE_URL + "/users/v1/login/", LOGIN_URL);
+
+  const response = await axios.post(
+    "http://blog-cms-tech-writing2-dev.us-west-1.elasticbeanstalk.com/users/v1/login/",
+    userData,
+    config
+  );
 
   if (response.data) {
     localStorage.setItem("blog-cms-token", response.data.token);
