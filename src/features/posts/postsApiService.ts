@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://34.201.61.154:8000";
 const getPosts = async () => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
@@ -24,7 +24,7 @@ const getPostById = async (id: string) => {
   return response.data;
 };
 
-const UpdateByIdService = async (blog:any) => {
+const UpdateByIdService = async (blog: any) => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
@@ -32,11 +32,14 @@ const UpdateByIdService = async (blog:any) => {
     },
   };
   // const data = JSON.stringify({blog})
-  const response = await axios.patch(BASE_URL + `/blog/v1/posts/${blog.id}/update`, blog,config);
+  const response = await axios.patch(
+    BASE_URL + `/blog/v1/posts/${blog.id}/update`,
+    blog,
+    config
+  );
   console.log(response.data, "my res");
   return response.data;
 };
-
 
 const createPosts = async (postData: any) => {
   const token = localStorage.getItem("blog-cms-token");
@@ -68,5 +71,11 @@ const publishContent = async (id: string) => {
   console.log(response.data, "my res");
   return response.data;
 };
-const postsAPiService = { getPosts, createPosts, getPostById, publishContent , UpdateByIdService };
+const postsAPiService = {
+  getPosts,
+  createPosts,
+  getPostById,
+  publishContent,
+  UpdateByIdService,
+};
 export default postsAPiService;
