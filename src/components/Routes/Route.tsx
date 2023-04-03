@@ -31,9 +31,6 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  // useEffect(() => {
-  //   const auth = checkToken();
-  // }, [localStorage.getItem("token")]);
   const auth = checkToken();
   console.log("am i auth", auth);
   console.log("my auth status");
@@ -42,24 +39,6 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   }
 
   return children;
-  // return auth ? children : redirect("/signin");
 };
-
-// const PrivateRoute = ({ children }: PrivateRouteProps) => {
-//   const token = JSON.parse(localStorage.getItem("token") || "{}");
-//   const history = useNavigate();
-//   const auth = checkToken();
-//   useEffect(() => {
-//     if (!auth) {
-//       //   history.push(Routes.Login);
-//       history("/signin");
-//     }
-//   }, []);
-//   return (
-//     <Fragment>
-//       <main>{children}</main>
-//     </Fragment>
-//   );
-// };
 
 export default PrivateRoute;
