@@ -13,7 +13,7 @@ const login = async (userData: any) => {
   console.log(process.env.REACT_APP_BASE_URL + "/users/v1/login/", LOGIN_URL);
 
   const response = await axios.post(
-    "http://localhost:8000/users/v1/login/",
+    "http://blog-cms-tech-writing2-dev.us-west-1.elasticbeanstalk.com/users/v1/login/",
     userData,
     config
   );

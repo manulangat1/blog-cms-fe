@@ -7,8 +7,6 @@ import { AppDispatch } from "../../../app/store";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
-
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
@@ -26,7 +24,7 @@ const CreatePost = () => {
   function handleEditorChange({ html, text }: any) {
     // console.log("handleEditorChange", html, text);
     const { content } = state;
-    console.log('handleEditorChange', html, text);
+    console.log("handleEditorChange", html, text);
     setState({ ...state, content: text });
     console.log(state);
   }
@@ -41,29 +39,29 @@ const CreatePost = () => {
     setState({ ...state, [e.target.name]: e.target.value });
     console.log(state);
   };
-  const sendData = async (file:any) => { 
-    const data = new FormData()
-    data.append("files", file)
-    const req = await axios.post("http://localhost:8000/blog/v1/upload/", 
-    data)
-    console.log(req.data)
-    return req.data
-  }
-  const imageUpload = async (file:any) => {
-    console.log("file", file)
-    
-    return new Promise(async resolve => {
-
-      const f = await sendData(file)
-
-      // console.log(f && f.data[0][1],'allla', f && f.data[1][0]) 
-      const url = f.data
-      console.log(url, 'my url') 
-      const text = "hey"
-      console.log(text,'my text')
-      resolve( `${url}`.toString())
-    }
+  const sendData = async (file: any) => {
+    const data = new FormData();
+    data.append("files", file);
+    const req = await axios.post(
+      "http://blog-cms-tech-writing2-dev.us-west-1.elasticbeanstalk.com/blog/v1/upload/",
+      data
     );
+    console.log(req.data);
+    return req.data;
+  };
+  const imageUpload = async (file: any) => {
+    console.log("file", file);
+
+    return new Promise(async (resolve) => {
+      const f = await sendData(file);
+
+      // console.log(f && f.data[0][1],'allla', f && f.data[1][0])
+      const url = f.data;
+      console.log(url, "my url");
+      const text = "hey";
+      console.log(text, "my text");
+      resolve(`${url}`.toString());
+    });
   };
   const handleSubmit = async () => {
     await dispatch(createPosts(state));
@@ -117,7 +115,6 @@ const CreatePost = () => {
             onImageUpload={imageUpload}
             // value=
           />
-
         </form>
         <Button
           onClick={handleSubmit}
