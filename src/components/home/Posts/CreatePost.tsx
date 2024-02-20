@@ -43,6 +43,7 @@ const CreatePost = () => {
     const data = new FormData();
     data.append("files", file);
     const req = await axios.post(
+
       "https://api.kipchirchirlangat.com/blog/v1/upload/",
       data
     );
