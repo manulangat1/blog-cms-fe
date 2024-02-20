@@ -10,7 +10,7 @@ function Home() {
   const { isLoading, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
-  console.log(isLoading);
+
   useEffect(() => {
     if (!isAuthenticated) {
       redirect("/signin");

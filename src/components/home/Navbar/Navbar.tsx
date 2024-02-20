@@ -10,14 +10,11 @@ import { RootState, AppDispatch } from "../../../app/store";
 import { redirect, useNavigate, Link, NavLink } from "react-router-dom";
 import { reset } from "../../../features/auth/authSlice";
 import { Button } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
 function Navbar() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const {  isAuthenticated } = useSelector(
-    (state: RootState) => state.auth
-  );
-  console.log(isAuthenticated, "this is authenticated")
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
   const handleLogout = async () => {
     await localStorage.removeItem("blog-cms-token");
     await dispatch(reset());

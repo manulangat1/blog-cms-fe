@@ -17,7 +17,6 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (userData: any, thunkAPI) => {
     try {
-      //   console.log("my auth data", userData);
       return authAPIService.login(userData);
     } catch (error: any) {
       const message =
@@ -36,8 +35,6 @@ export const getProfile = createAsyncThunk(
   "auth/profile",
   async (token: any, thunkAPI) => {
     try {
-      // const token = localStorage.getItem("token");
-      console.log(token, "is my token");
       return await authAPIService.profile(token);
     } catch (error: any) {
       const message =

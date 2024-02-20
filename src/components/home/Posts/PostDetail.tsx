@@ -1,27 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../app/store";
-import {
-  getPostDetail,
-} from "../../../features/posts/postSlice";
+import { getPostDetail } from "../../../features/posts/postSlice";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 
 import gfm from "remark-gfm";
 
-import './post.css'
-
-//  set the highlight
+import "./post.css";
 
 import rehypeRaw from "rehype-raw";
 import { Helmet } from "react-helmet";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-// const marked = require("marked");
-// interface paramI {
-//   id?: string;
-// }
+
 const PostDetail = () => {
   const dispatch = useDispatch<AppDispatch>();
   const params = useParams();
@@ -29,10 +22,10 @@ const PostDetail = () => {
     if (params.id) {
       dispatch(getPostDetail(params.id));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const {  post } = useSelector((state: RootState) => state.posts);
-  console.log(params, post && post.body);
+  const { post } = useSelector((state: RootState) => state.posts);
+
   return (
     <main
       style={{
@@ -74,7 +67,6 @@ const PostDetail = () => {
                   style={materialDark}
                   language={match[1]}
                   PreTag="div"
-                  // {...props}
                 />
               ) : (
                 <code className={className} {...props}>

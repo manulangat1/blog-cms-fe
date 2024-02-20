@@ -13,7 +13,7 @@ import { AppDispatch, RootState } from "../../../app/store";
 import CircularProgress from "@mui/material/CircularProgress";
 // import CreatePost from "./CreatePost";
 import { CardMedia, Grid } from "@mui/material";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 // import rehypeRaw from "rehype-raw";
@@ -28,29 +28,24 @@ import {  useNavigate } from "react-router-dom";
 function Posts() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { posts, isLoading} = useSelector(
-    (state: RootState) => state.posts
-  );
+  const { posts, isLoading } = useSelector((state: RootState) => state.posts);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  console.log(isLoading, "am i loading");
+
   useEffect(() => {
     dispatch(getPosts());
-    console.log("i am trying");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
   // const limitChar = (content: string) => {
   //   return content.substring(0, 200) + "...";
   // };
   const onClickRedirect = (id: string) => {
-    console.log("i am clicked", id);
     return navigate(`/post/${id}`);
   };
   const onEditRedirect = (id: string) => {
-    console.log("i am clicked", id);
     return navigate(`/edit/${id}`);
   };
   const onPublish = (id: string) => {
-    console.log("I am published");
     dispatch(publish(id));
   };
   return (
@@ -101,8 +96,8 @@ function Posts() {
                     {post.title}
                   </Typography>
                   {/* <Typography variant="body2"> */}
-                    {/* {limitChar(post.content)} */}
-                    {/* <ReactMarkdown
+                  {/* {limitChar(post.content)} */}
+                  {/* <ReactMarkdown
                       remarkPlugins={[[gfm, { singleTilde: false }]]}
                       rehypePlugins={[rehypeRaw]}
                       children={limitChar(post.content)}
@@ -125,8 +120,6 @@ function Posts() {
                       }}
                     /> */}
                   {/* </Typography> */}
-
-
                 </CardContent>
                 <CardActions>
                   <Button

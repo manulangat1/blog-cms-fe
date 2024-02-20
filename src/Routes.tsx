@@ -13,37 +13,18 @@ function Dashboard() {
     <Router>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/post/:id"
-          element={
-            <PrivateRoute>
-              <PostDetail />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/new-post"
-          element={
-            <PrivateRoute>
-              <CreatePost />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route 
-          path="/edit/:id"
-          element={
-            <PrivateRoute>
-              <EditPost />
-            </PrivateRoute>
-          }></Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/post/:id" element={<PostDetail />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/new-post" element={<CreatePost />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/edit/:id" element={<EditPost />} />
+        </Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

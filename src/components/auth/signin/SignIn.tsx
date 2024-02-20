@@ -25,7 +25,6 @@ const SignIn = () => {
   );
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("auth");
       return navigate("/");
     }
   }, [isAuthenticated]);
@@ -36,11 +35,9 @@ const SignIn = () => {
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });
-    console.log(state);
   };
-  console.log(message ? message : "Nothing");
+
   const handleSubmit = async () => {
-    console.log(state);
     await dispatch(
       loginUser({ username: state.email, password: state.password })
     );

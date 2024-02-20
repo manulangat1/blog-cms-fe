@@ -10,13 +10,7 @@ const login = async (userData: any) => {
     },
   };
 
-  console.log(process.env.REACT_APP_BASE_URL + "/users/v1/login/", LOGIN_URL);
-
-  const response = await axios.post(
-    "https://api.kipchirchirlangat.com/users/v1/login/",
-    userData,
-    config
-  );
+  const response = await axios.post(LOGIN_URL, userData, config);
 
   if (response.data) {
     localStorage.setItem("blog-cms-token", response.data.token);
@@ -28,15 +22,11 @@ const profile = async (token: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 
   const response = await axios.get(PROFILE_URL, config);
-  console.log("profile res", response.data);
-  // if (response.data) {
-  //   localStorage.setItem("token", response.data.token);
-  // }
   return response.data;
 };
 
