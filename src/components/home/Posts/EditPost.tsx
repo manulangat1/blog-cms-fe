@@ -66,7 +66,7 @@ const EditPost = () => {
     const data = new FormData();
     data.append("files", file);
     const req = await axios.post(
-      "https://blog-cms-tech-writing2-dev.us-west-1.elasticbeanstalk.com/blog/v1/upload/",
+      "https://api.kipchirchirlangat.com/blog/v1/upload/",
       data
     );
     console.log(req.data);
