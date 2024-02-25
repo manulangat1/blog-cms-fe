@@ -22,11 +22,9 @@ interface Istate {
 }
 const CreatePost = () => {
   function handleEditorChange({ html, text }: any) {
-    // console.log("handleEditorChange", html, text);
     const { content } = state;
-    console.log("handleEditorChange", html, text);
+
     setState({ ...state, content: text });
-    console.log(state);
   }
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -35,32 +33,26 @@ const CreatePost = () => {
     content: "",
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("here");
     setState({ ...state, [e.target.name]: e.target.value });
-    console.log(state);
   };
   const sendData = async (file: any) => {
     const data = new FormData();
     data.append("files", file);
     const req = await axios.post(
-
-      "https://api.kipchirchirlangat.com/blog/v1/upload/",
+      "api.kipchirchirlangat.com/blog/v1/upload/",
       data
     );
-    console.log(req.data);
+
     return req.data;
   };
   const imageUpload = async (file: any) => {
-    console.log("file", file);
-
     return new Promise(async (resolve) => {
       const f = await sendData(file);
 
-      // console.log(f && f.data[0][1],'allla', f && f.data[1][0])
       const url = f.data;
-      console.log(url, "my url");
+
       const text = "hey";
-      console.log(text, "my text");
+
       resolve(`${url}`.toString());
     });
   };

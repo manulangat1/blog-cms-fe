@@ -5,7 +5,7 @@ const getPosts = async () => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.get(BASE_URL + "/blog/v1/posts/", config);
@@ -17,7 +17,7 @@ const getPostById = async (id: string) => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.get(BASE_URL + `/blog/v1/posts/${id}`, config);
@@ -29,7 +29,7 @@ const UpdateByIdService = async (blog: any) => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   // const data = JSON.stringify({blog})
@@ -46,7 +46,7 @@ const createPosts = async (postData: any) => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.post(
@@ -62,7 +62,7 @@ const publishContent = async (id: string) => {
   const token = localStorage.getItem("blog-cms-token");
   const config = {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 
