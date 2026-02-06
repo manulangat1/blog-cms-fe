@@ -14,7 +14,7 @@ COPY ./package*.json .
 RUN npm install 
 
 COPY . ${APP_HOME}
-# COPY . .
+# COPY . . is this really needed?
 
 
 CMD ["npm", "start"]
