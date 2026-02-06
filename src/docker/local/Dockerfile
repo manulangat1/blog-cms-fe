@@ -14,6 +14,7 @@ COPY ./package*.json .
 RUN npm install 
 
 COPY . ${APP_HOME}
+# COPY . .
 
 
 CMD ["npm", "start"]
