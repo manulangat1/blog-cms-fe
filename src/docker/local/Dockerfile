@@ -4,6 +4,8 @@ FROM node:${NODE_VERSION} as node
 
 FROM node as client-local-build 
 
+
+LABEL AUTHOR "Langat emmanuel"
 ARG APP_HOME=/app 
 
 WORKDIR ${APP_HOME}
