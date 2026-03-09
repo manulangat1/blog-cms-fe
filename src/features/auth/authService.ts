@@ -30,21 +30,5 @@ const profile = async (token: any) => {
   return response.data;
 };
 
-// const logout = async (token: any) => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Token ${token}`,
-//     },
-//   };
-
-//   const response = await axios.get(PROFILE_URL, config);
-//   console.log("profile res", response.data);
-//   // if (response.data) {
-//   //   localStorage.setItem("token", response.data.token);
-//   // }
-//   return response.data;
-// };
-
 const authAPIService = { login, profile };
 export default authAPIService;

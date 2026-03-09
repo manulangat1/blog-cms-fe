@@ -60,8 +60,9 @@ const EditPost = () => {
     const data = new FormData();
     data.append("files", file);
     const req = await axios.post(
-      "api.kipchirchirlangat.com/blog/v1/upload/",
-      data
+      // "api.kipchirchirlangat.com/blog/v1/upload/",
+      `${process.env.REACT_APP_BASE_URL}/blog/v1/upload/`,
+      data,
     );
 
     return req.data;
