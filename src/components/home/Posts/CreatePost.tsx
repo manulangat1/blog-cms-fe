@@ -35,9 +35,22 @@ const CreatePost = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-  const sendData = async (file: any) => {
+  // const sendData = async (file: any) => {
+  //   const data = new FormData();
+  //   data.append("files", file);
+  //   const req = await axios.post(
+  //     `${process.env.REACT_APP_BASE_URL}/blog/v1/upload/`,
+  //     data,
+  //   );
+
+  //   return req.data;
+  // };
+  const sendData = async (file: File) => {
     const data = new FormData();
-    data.append("files", file);
+
+    // IMPORTANT: pass filename explicitly
+    data.append("files", file, file.name);
+
     const req = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/blog/v1/upload/`,
       data,
@@ -45,17 +58,51 @@ const CreatePost = () => {
 
     return req.data;
   };
-  const imageUpload = async (file: any) => {
-    return new Promise(async (resolve) => {
-      const f = await sendData(file);
+  // const imageUpload = async (file: any) => {
+  //   return new Promise(async (resolve) => {
+  //     // const sanitizedName = `${Date.now()}-${file.name}`
+  //     //   .replace(/\s+/g, "-") // replace spaces
+  //     //   .replace(/[^\w.-]/g, ""); // remove special characters
 
-      const url = f.data;
+  //     // const sanitizedFile = new File([file], sanitizedName, {
+  //     //   type: file.type,
+  //     // });
+  //     const extension = file.name.split(".").pop();
+  //     const sanitizedName = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+  //     const sanitizedFile = new File([file], sanitizedName, {
+  //       type: file.type,
+  //     });
 
-      const text = "hey";
+  //     const f = await sendData(sanitizedFile);
 
-      resolve(`${url}`.toString());
+  //     const url = f.data;
+
+  //     resolve(`${url}`.toString());
+  //   });
+  // };
+
+  const imageUpload = async (file: File) => {
+    // get extension
+    const extension = file.name.split(".").pop();
+
+    // generate safe unique name
+    const sanitizedName = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+
+    // create new file with sanitized name
+    const sanitizedFile = new File([file], sanitizedName, {
+      type: file.type,
     });
+
+    // upload using your existing function
+    const f = await sendData(sanitizedFile);
+
+    const url = f.data;
+
+    console.log("Upload response:", url, url.toString());
+
+    return url.toString();
   };
+
   const handleSubmit = async () => {
     await dispatch(createPosts(state));
     await dispatch(getPosts());
